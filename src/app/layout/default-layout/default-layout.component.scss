@@ -1,0 +1,31 @@
+@import 'variables';
+
+:host {
+  .ng-scrollbar {
+    --scrollbar-padding: 1px;
+    --scrollbar-size: 5px;
+    --scrollbar-thumb-color: var(--cui-gray-500, #999);
+    --scrollbar-thumb-hover-color: var(--cui-gray-400, #999);
+    --scrollbar-hover-size: calc(var(--scrollbar-size) * 1.5);
+  }
+}
+
+.logo {
+  margin-left: 20px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  font-size: 40px;
+  font-weight: 700;
+}
+
+span {
+  color: var(--main-color);
+}
+
+svg {
+  margin: 15px;
+}
+
+.sidebar-brand {
+  border-bottom: solid 1px #ddd;
+}

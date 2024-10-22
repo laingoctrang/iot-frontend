@@ -1,0 +1,183 @@
+<div id="gauge" class="row">
+  <div id="temperature" class="col-lg-4 col-md-6 col-sm-12">
+    <div class="card p-3">
+      <div class="row d-flex align-items-center">
+        <i class="col-2 fa-solid fa-temperature-three-quarters"></i>
+        <label class="col">Temperature</label>
+      </div>
+
+      <div class="row">
+        <apx-chart [series]="temperatureGauge.series!" [chart]="temperatureGauge.chart!"
+          [plotOptions]="temperatureGauge.plotOptions!" [labels]="temperatureGauge.labels!"
+          [fill]="temperatureGauge.fill!">
+        </apx-chart>
+      </div>
+
+      <div class="temperature-gauge-value" #gaugeValue>
+        <p>0</p>
+        <span>°C</span>
+        <p>50</p>
+      </div>
+
+      <div class="text-body-secondary font-weight-300 text-center">
+        <p>Highest temperature: {{minMaxDataSensors.maxTemperature}}°C</p>
+        <p>Lowest temperature: {{minMaxDataSensors.minTemperature}}°C</p>
+      </div>
+    </div>
+  </div>
+
+  <div id="humidity" class="col-lg-4 col-md-6 col-sm-12">
+    <div class="card p-3">
+      <div class="row d-flex align-items-center">
+        <i class="col-2 fa-solid fa-droplet"></i>
+        <label class="col">Humidity</label>
+      </div>
+
+      <div class="row">
+        <apx-chart [series]="humidityGauge.series!" [chart]="humidityGauge.chart!"
+          [plotOptions]="humidityGauge.plotOptions!" [labels]="humidityGauge.labels!"
+          [fill]="humidityGauge.fill!"></apx-chart>
+      </div>
+
+      <div class="humidity-gauge-value">
+        <p>0</p>
+        <span>%</span>
+        <p>100</p>
+      </div>
+
+      <div class="text-body-secondary font-weight-300 text-center">
+        <p>Highest humidity: {{minMaxDataSensors.maxHumidity}}%</p>
+        <p>Lowest humidity: {{minMaxDataSensors.minHumidity}}%</p>
+      </div>
+    </div>
+  </div>
+
+  <div id="light" class="col-lg-4 col-md-6 col-sm-12">
+    <div class="card p-3">
+      <div class="row d-flex align-items-center">
+        <i class="col-2 fa-solid fa-sun"></i>
+        <label class="col">Light</label>
+      </div>
+
+      <div class="row">
+        <apx-chart [series]="lightGauge.series!" [chart]="lightGauge.chart!" [plotOptions]="lightGauge.plotOptions!"
+          [labels]="lightGauge.labels!" [fill]="lightGauge.fill!"></apx-chart>
+      </div>
+
+      <div class="light-gauge-value">
+        <p>0</p>
+        <span>lux</span>
+        <p>10000</p>
+      </div>
+
+      <div class="text-body-secondary font-weight-300 text-center">
+        <p>Highest light: {{minMaxDataSensors.maxLight}}lux</p>
+        <p>Lowest light: {{minMaxDataSensors.minLight}}lux</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="chart-toggle" class="row my-4">
+  <div id="chart" class="col-9">
+    <div class="card p-4">
+      <div class="row">
+        <p class="title mb-2">Data Chart</p>
+        <div class="text-body-secondary font-weight-300 pt-1">{{ currentDate | date: 'yyyy MMMM dd' }}</div>
+      </div>
+
+      <div class="row">
+        <canvas id="lineChart"></canvas>
+      </div>
+    </div>
+  </div>
+
+  <div id="toggle" class="col">
+    <div id="fan" class="card p-3 mb-4 toggle-container" [ngClass]="{'gradient-background': fanOn}">
+      <div class="d-flex justify-content-between align-items-start">
+
+        <div class="checking-container">
+          <span *ngIf="hasErrorFan">Error occurred</span>
+          <div *ngIf="isProcessingFan">
+            <div class="spinner-border" role="status"></div>
+            <span>Turning {{fanOn ? "off" : "on"}}...</span>
+          </div>
+        </div>
+
+        <div class="form-check form-switch">
+          <input 
+            class="form-check-input fan" 
+            type="checkbox" 
+            role="switch" 
+            [checked]="fanOn" 
+            (click)="toggleDevice('fan', $event)"
+            [disabled]="isProcessingFan"
+          >
+        </div>
+      </div>
+    
+      <div class="d-flex justify-content-between align-items-end toggle-content">
+        <i class="fas fa-fan"></i>
+        <p>Fan</p>
+      </div>      
+    </div>
+
+    <div id="ac" class="card p-3 mb-4 toggle-container" [ngClass]="{'gradient-background': acOn}">
+      <div class="d-flex justify-content-between align-items-start">
+
+        <div class="checking-container">
+          <span *ngIf="hasErrorAc">Error occurred</span>
+          <div *ngIf="isProcessingAc">
+            <div class="spinner-border" role="status"></div>
+            <span>Turning {{acOn ? "off" : "on"}}...</span>
+          </div>
+        </div>
+
+        <div class="form-check form-switch">
+          <input 
+            class="form-check-input ac" 
+            type="checkbox"
+            role="switch" 
+            [checked]="acOn"
+            (click)="toggleDevice('ac', $event)"
+            [disabled]="isProcessingAc"
+          >
+        </div>
+      </div>
+    
+      <div class="d-flex justify-content-between align-items-end toggle-content">
+        <i class="fa-solid fa-snowflake"></i>
+        <p>Air conditioner</p>
+      </div>     
+    </div>  
+
+    <div id="bulb" class="card p-3 toggle-container" [ngClass]="{'gradient-background': bulbOn}">
+      <div class="d-flex justify-content-between align-items-start">
+
+        <div class="checking-container">
+          <span *ngIf="hasErrorBulb">Error occurred</span>
+          <div *ngIf="isProcessingBulb">
+            <div class="spinner-border" role="status"></div>
+            <span>Turning {{bulbOn ? "off" : "on"}}...</span>
+          </div>
+        </div>
+        
+        <div class="form-check form-switch">
+          <input 
+            class="form-check-input bulb" 
+            type="checkbox" 
+            role="switch"
+            [checked]="bulbOn"
+            (click)="toggleDevice('bulb', $event)"
+            [disabled]="isProcessingBulb"
+          >
+        </div>
+      </div>
+    
+      <div class="d-flex justify-content-between align-items-end toggle-content">
+        <i class="fa-solid fa-lightbulb"></i>
+        <p>Bulb</p>
+      </div>
+    </div>
+  </div>
+</div>

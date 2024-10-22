@@ -1,0 +1,301 @@
+body {
+  font-family: 'Lexend Deca' !important;
+}
+
+.title {
+  font-size: 40px;
+}
+
+.btn-filter, .btn-clear {
+  padding: 8px;
+  margin-right: 15px;
+  border-radius: 8px;
+  border: 1px solid rgba(37, 43, 54, 0.95);
+  background-color: transparent;
+  font-weight: 300;
+  color: rgba(37, 43, 54, 0.95);
+}
+
+.btn-filter:hover, .btn-clear:hover, .btn-filter:focus {
+  color: #fff;
+  background-color: var(--main-color);
+  border-color: var(--main-color);
+}
+
+select {
+  padding: 6px;
+  border-radius: 8px;
+  border: 1px solid rgba(37, 43, 54, 0.95);
+  font-weight: 300;
+  color: rgba(37, 43, 54, 0.95);
+  cursor: pointer;
+  width: 300px;
+}
+
+/* Định dạng cho các tùy chọn khi không được chọn */
+select option {
+  
+  font-weight: 300;
+  color: rgba(37, 43, 54, 0.95);
+}
+
+/* Định dạng cho option được chọn */
+select:focus option:checked {
+  background-color: var(--main-color);
+  color: #fff;
+  font-weight: 400;
+}
+
+/* Định dạng khi select có focus */
+select:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+
+
+::ng-deep .popover { // ghi đè popover của bootstrap
+  width: auto !important; /* Đặt độ rộng tự động cho popover */
+  max-width: 100%;
+  box-sizing: border-box;
+  font-family: 'Lexend Deca';
+}
+
+.filter-container {
+  display: flex;
+  justify-content: space-between; /* Tạo 2 cột cho các container */
+  gap: 30px;
+}
+
+.datetime-filter-container {
+  display: flex;
+  flex-direction: column; /* Sắp xếp các phần tử theo chiều dọc */
+  max-width: 100%;
+  box-sizing: border-box;
+  margin-bottom: 8px;
+}
+
+.datetime-filter-container label {
+  font-size: 16px;
+  color: rgba(37, 43, 54, 0.95);
+}
+
+.date-form {
+  display: flex;
+  align-items: center;
+  width: 100%; /* Đảm bảo form chiếm toàn bộ chiều rộng */
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  margin-bottom: 5px;
+  padding: 5px;
+  font-weight: 300;
+}
+
+.date-form input {
+  background-color: transparent;
+  padding: 5px;
+  border: none;
+  outline: none;
+  flex: 1;
+  font-weight: 300;
+}
+
+.date-form button {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.date-form button i {
+  font-size: 16px;
+  color: rgba(37, 43, 54, 0.95);
+}
+
+.date-form button i:hover {
+  color: var(--main-color);
+}
+
+.time-form {
+  display: flex;
+  align-items: center;
+  width: 100%; /* Đảm bảo form chiếm toàn bộ chiều rộng */
+}
+
+/* Ghi đè CSS cho Timepicker */
+::ng-deep ngb-timepicker, 
+::ng-deep ngb-timepicker .ngb-tp-input, 
+::ng-deep ngb-timepicker .ngb-tp-hour, 
+::ng-deep ngb-timepicker .ngb-tp-minute, 
+::ng-deep ngb-timepicker .ngb-tp-meridian {
+  font-weight: 300;
+  flex-wrap: nowrap;
+}
+
+.btn-apply {
+  padding: 8px;
+  width: 80px;
+  border-radius: 6px;
+  border: 1px solid rgba(37, 43, 54, 0.95);
+  background-color: transparent;
+}
+
+
+.btn-apply:hover {
+  color: #fff;
+  background-color: var(--main-color);
+  border-color: var(--main-color);
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse; /* Giúp bỏ viền giữa các ô */
+  border-radius: 12px; /* Bo tròn 4 góc của bảng */
+  overflow: hidden; /* Ẩn phần viền bị vỡ khi bo tròn */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  box-sizing: border-box;
+}
+
+table th {
+  background-color: var(--main-color);
+  font-weight: 400; /* Chữ đậm cho tiêu đề */
+  color: white; /* Màu chữ trắng */
+  padding: 15px; /* Padding cho tiêu đề */
+  border: 1px solid #ddd; /* Viền màu #ddd cho tiêu đề */
+}
+
+/* Giá trị trong bảng */
+table td {
+  font-weight: 300; /* Font-weight 300 cho giá trị */
+  padding: 15px; /* Padding cho giá trị */
+  text-align: left; /* Căn trái cho giá trị */
+  border: 1px solid #ddd; /* Viền màu #ddd cho giá trị */
+}
+
+
+/* Hiệu ứng hover cho các dòng trong bảng */
+table tbody tr:hover {
+  background-color: #f5f5f5; /* Màu nền khi hover */
+}
+
+table th:nth-child(1), table td:nth-child(1), 
+table th:nth-child(2), table td:nth-child(2) {
+  width: 7%;
+}
+
+.header-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* Tách khoảng giữa text và icon */
+  cursor: pointer; /* Thay đổi con trỏ khi hover */
+  position: relative; /* Để các thành phần con (search box) dùng được position absolute */
+}
+
+.header-text {
+  margin: 0;
+  flex-grow: 1; /* Để text chiếm không gian còn lại */
+}
+
+.header-container i {
+  margin-left: 5px; /* Khoảng cách giữa các icon */
+  transition: color 0.3s; /* Hiệu ứng chuyển màu */
+  color: #fff;
+  font-size: 14px;
+}
+
+.header-container i:hover {
+  color: #000; /* Màu sắc khi hover */
+}
+
+.search-row td {
+  padding: 6px;
+}
+
+.input-field {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 6px;
+  border: 1px solid #ddd;
+  box-sizing: border-box;
+  outline: none;
+  transition: border-color 0.2s ease-in-out;
+  background-color: #fff;
+}
+
+.input-field .dp-hidden input{
+  position: absolute;
+  width: 50px;
+  background-color: transparent;
+  color: transparent;
+  margin-top: -4px;
+  margin-left: 183px;
+}
+
+.input-field input {
+  border: none;
+  outline: none;
+  font-weight: 300;
+  color: rgba(37, 43, 54, 0.95);
+  z-index: 1000;
+  width: 95%;
+}
+
+.input-field i {
+  margin-left: 6px;
+  font-size: 16px;
+  color: rgba(37, 43, 54, 0.95);
+  cursor: pointer;
+  z-index: 1000;
+}
+
+.input-field i:hover {
+  color: var(--main-color);
+}
+
+.btn-container {
+  display: flex;
+  justify-content: space-between;
+  margin: 2px;
+}
+
+.btn-container button {
+  width: 70px;
+  padding: 4px;
+  border-radius: 6px;
+  border: 1px solid rgba(37, 43, 54, 0.95);
+  background-color: transparent;
+}
+
+
+.btn-container button:hover {
+  color: #fff;
+  background-color: var(--main-color);
+  border-color: var(--main-color);
+}
+
+
+.pagination {
+  display: flex;
+  justify-content: end;
+  margin-right: 15px;
+}
+
+::ng-deep .page-link {
+  color: rgba(37, 43, 54, 0.95);
+  border: 1px solid #ddd;
+  font-weight: 300;
+}
+
+::ng-deep .page-link:hover {
+  background-color: #f5f5f5;
+  border: 1px solid #ddd;
+}
+
+/* Focus hoặc đang được chọn */
+::ng-deep .page-item.active .page-link,
+::ng-deep .page-link:focus {
+  background-color: var(--main-color); /* Nền màu chính */
+  color: #fff; /* Chữ trắng */
+  box-shadow: none;
+  font-weight: 400;
+}

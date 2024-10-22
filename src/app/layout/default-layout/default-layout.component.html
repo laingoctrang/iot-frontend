@@ -1,0 +1,20 @@
+<c-sidebar #sidebar1="cSidebar" class="d-print-none sidebar sidebar-fixed border-end" id="sidebar1" visible>
+  <c-sidebar-brand [routerLink]="['/']">
+    <svg [class]="{icon: false}" cIcon class="sidebar-brand-full" height="32" name="logo" title="CoreUI Logo"></svg>
+    <!-- <img src="../../../assets/logo.png" alt="" style="width: 200px; height: auto; margin: 10px;"> -->
+     <!-- <div class="logo">IoT<span>rang</span></div> -->
+  </c-sidebar-brand>
+
+
+
+    <c-sidebar-nav #overflow [navItems]="navItems" dropdownMode="close" compact />
+</c-sidebar>
+
+<!--main-->
+<div class="wrapper d-flex flex-column min-vh-100 mt-4">
+  <div class="body flex-grow-1">
+    <c-container breakpoint="lg" class="h-auto px-4">
+      <router-outlet />
+    </c-container>
+  </div>
+</div>

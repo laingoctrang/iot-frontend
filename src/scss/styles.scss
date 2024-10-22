@@ -1,0 +1,82 @@
+/* You can add global styles to this file, and also import other style files */
+
+// If you want to override variables do it here
+@import "variables";
+
+// Import styles with default layout.
+@import "@coreui/coreui/scss/coreui";
+
+// Import Chart.js custom tooltips styles
+@import "@coreui/chartjs/scss/coreui-chartjs";
+
+// Custom styles for this theme
+@import "theme";
+
+html, body {
+    height: 100%;
+}
+
+
+body {
+    font-family: 'Lexend Deca', 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
+}
+
+.font-weight-300 {
+    font-weight: 300;
+}
+
+.font-weight-400 {
+    font-weight: 400;
+}
+
+.font-weight-500 {
+    font-weight: 500;
+}
+
+.font-weight-600 {
+    font-weight: 600;
+}
+
+.sidebar {
+    .sidebar-brand {
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    ;
+
+    background-color: var(--sidebar-bg-color);
+    color: var(--sidebar-text-color);
+
+    .nav-link {
+        color: var(--sidebar-text-color) !important;
+        transition: background-color .5s ease, color 0.3s ease !important;
+
+        .nav-icon {
+            color: var(--sidebar-icon-color) !important;
+            transition: color 0.3s ease !important;
+        }
+
+        &:hover {
+            background-color: var(--sidebar-bg-hover-color) !important;
+            color: var(--sidebar-text-hover-color) !important;
+
+            .nav-icon {
+                color: var(--sidebar-icon-hover-color) !important;
+            }
+        }
+
+        &.active {
+            background-color: var(--sidebar-bg-active-color);
+            color: var(--sidebar-text-active-color) !important;
+
+            .nav-icon {
+                color: var(--sidebar-icon-active-color) !important;
+            }
+        }
+    }
+}
+
+.card {
+    border-radius: 12px;
+}

@@ -1,0 +1,21 @@
+// Variable overrides
+//
+
+// If you want to customize your project please add your variables below.
+$enable-deprecation-messages: false !default;
+:root {
+  --sidebar-icon-color: #000000;
+  --sidebar-icon-hover-color: #FFFFFF;
+  --sidebar-icon-active-color: #FFFFFF;
+
+  --sidebar-bg-color: #FFFFFF;
+  --sidebar-bg-hover-color: #474DDC;
+  --sidebar-bg-active-color: #474DDC;
+
+  --sidebar-text-color: #000000;
+  --sidebar-text-hover-color: #FFFFFF;
+  --sidebar-text-active-color: #FFFFFF;
+
+  --main-color: #474DDC;
+}
+

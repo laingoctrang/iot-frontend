@@ -1,0 +1,166 @@
+<div class="card p-3 mb-4">
+  <div class="row m-2 d-flex align-items-center justify-content-between">
+    <div class="col-6 d-flex align-items-center justify-content-start">
+      <p class="title mb-0">Data Sensors</p>
+    </div>
+  </div>
+
+  <div class="mt-3 mx-3 d-flex justify-content-between">
+    <div class="button-container">
+      <!-- <button class="btn-filter" type="button" placement="bottom-left" [autoClose]="'outside'"
+        [ngbPopover]="filterContent" #p="ngbPopover"><i class="fa-solid fa-filter"></i>
+        Add Filter</button> -->
+      <button class="btn-clear" type="button" (click)="clearAll()"><i class="fa-solid fa-filter-circle-xmark"></i>
+        Clear All</button>
+    </div>
+
+    <select [(ngModel)]="pageSize" (ngModelChange)="refreshDataSensors()">
+      <option [ngValue]="10">10 items per page</option>
+      <option [ngValue]="20">20 items per page</option>
+      <option [ngValue]="50">50 items per page</option>
+      <option [ngValue]="100">100 items per page</option>
+    </select>
+
+  </div>
+
+  <!-- <ng-template #filterContent>
+    <div class="filter-container">
+      <div class="datetime-filter-container">
+        <form class="date-form">
+          <input id="datepicker" placeholder="yyyy-mm-dd hh:mm:ss" [value]="searchTimeFormatter()" name="dp"
+            [(ngModel)]="startDateTime.date" ngbDatepicker #start="ngbDatepicker" />
+          <button type="button" (click)="start.toggle()">
+            <i class="fa-regular fa-calendar-days"></i>
+          </button>
+        </form>
+
+        <form class="time-form">
+          <ngb-timepicker [(ngModel)]="startDateTime.time" name="tp" required></ngb-timepicker>
+        </form>
+      </div>
+    </div>
+
+  </ng-template> -->
+
+  <div class="row m-3">
+    <div class="p-0 overflow-x-auto">
+      <table>
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Id</th>
+            <th scope="col">
+              <div class="header-container">
+                <p class="header-text">Temperature</p>
+                <i class="fa-solid" [ngClass]="{
+                  'fa-sort-up': sortColumn === 'temperature' && sortDirection === 'asc',
+                  'fa-sort-down': sortColumn === 'temperature' && sortDirection === 'desc',
+                  'fa-sort': sortColumn !== 'temperature' || sortDirection === 'none'
+                }" (click)="updateSort('temperature')"></i>
+              </div>
+            </th>
+            <th scope="col">
+              <div class="header-container">
+                <p class="header-text">Humidity</p>
+                <i class="fa-solid" [ngClass]="{
+                  'fa-sort-up': sortColumn === 'humidity' && sortDirection === 'asc',
+                  'fa-sort-down': sortColumn === 'humidity' && sortDirection === 'desc',
+                  'fa-sort': sortColumn !== 'humidity' || sortDirection === 'none'
+                }" (click)="updateSort('humidity')"></i>
+              </div>
+            </th>
+            <th scope="col">
+              <div class="header-container">
+                <p class="header-text">Light</p>
+                <i class="fa-solid" [ngClass]="{
+                  'fa-sort-up': sortColumn === 'light' && sortDirection === 'asc',
+                  'fa-sort-down': sortColumn === 'light' && sortDirection === 'desc',
+                  'fa-sort': sortColumn !== 'light' || sortDirection === 'none'
+                }" (click)="updateSort('light')"></i>
+              </div>
+            </th>
+            <th scope="col" class="th-lg">
+              <div class="header-container">
+                <p class="header-text">Time</p>
+                <i class="fa-solid" [ngClass]="{
+            'fa-sort-up': sortColumn === 'time' && sortDirection === 'asc',
+            'fa-sort-down': sortColumn === 'time' && sortDirection === 'desc',
+            'fa-sort': sortColumn !== 'time' || sortDirection === 'none'
+          }" (click)="updateSort('time')"></i>
+
+              </div>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="search-row">
+            <td></td> <!-- Cột # để trống -->
+            <td></td> <!-- Cột Id để trống -->
+            <td>
+              <div class="input-field">
+                <input type="number" [(ngModel)]="searchTemperature" placeholder="Enter number"
+                  (input)="refreshDataSensors()">
+                <i class="fa-solid fa-xmark" (click)="clearTemperature()"></i>
+              </div>
+
+            </td>
+            <td>
+              <div class="input-field">
+                <input type="number" [(ngModel)]="searchHumidity" placeholder="Enter number"
+                  (input)="refreshDataSensors()">
+                <i class="fa-solid fa-xmark" (click)="clearHumidity()"></i>
+              </div>
+            </td>
+            <td> 
+              <div class="input-field">
+                <input type="number" [(ngModel)]="searchLight" placeholder="Enter number"
+                  (input)="refreshDataSensors()">
+                <i class="fa-solid fa-xmark" (click)="clearLight()"></i>
+              </div>
+
+            </td>
+            <td>
+
+              <form class="input-field">
+
+                <input placeholder="yyyy-mm-dd hh:mm:ss" placement="bottom" [autoClose]="'outside'"
+                  [ngbPopover]="datetime" #p="ngbPopover" [(ngModel)]="datetimeString" name="datetime"/> 
+                <i class="fa-solid fa-xmark" (click)="clearDatetime()"></i>
+
+                <ng-template #datetime>
+                  <ngb-datepicker [(ngModel)]="date" name="dp" (ngModelChange)="onDateChange()"/>
+                  <timepicker [(ngModel)]="time" name="time" (ngModelChange)="onTimeChange()"></timepicker>
+                  <div class="btn-container">
+                    <button type="button" (click)="clearDate()">Clear Date</button>
+                    <button type="button" (click)="clearTime()">Clear Time</button>
+                    <button type="button" (click)="refreshDataSensors()" (click)="p.close()">OK</button>
+                  </div>
+                  
+                </ng-template>
+              </form>
+
+
+            </td>
+          </tr>
+
+          <tr *ngFor="let element of dataSource; let i =  index">
+            <td>{{i + 1}}</td>
+            <td>{{element.id}}</td>
+            <td>{{element.temperature}}</td>
+            <td>{{element.humidity}}</td>
+            <td>{{element.light}}</td>
+            <td>{{formatDate(element.time)}}</td>
+          </tr>
+        </tbody>
+      </table>
+
+
+    </div>
+
+  </div>
+
+  <ngb-pagination class="pagination" [(page)]="pageNumber" [pageSize]="pageSize" [collectionSize]="collectionSize"
+    [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="onPageChange($event)">
+  </ngb-pagination>
+
+</div>
