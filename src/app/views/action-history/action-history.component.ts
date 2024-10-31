@@ -81,12 +81,12 @@ export class ActionHistoryComponent implements OnInit {
     if (this.searchAction) {
       params = params.set('action', this.searchAction);
     }
-    if (this.dateString !== '') {
-      params = params.set('date', this.dateString);
-    }
-    if (this.timeString !== '') {
-      params = params.set('time', this.timeString);
-    }
+    
+    this.dateString = this.datetimeString.split(" ")[0];
+    this.timeString = this.datetimeString.split(" ")[1];
+    this.time = '';
+    params = params.set('time', this.datetimeString);
+    
     if (this.sortDirection !== 'none') {
       params = params.set('sortBy', this.sortColumn);
       params = params.set('sortDir', this.sortDirection);
@@ -115,6 +115,7 @@ export class ActionHistoryComponent implements OnInit {
     let day = this.date.day.toString().padStart(2, '0');
 
     this.dateString = `${year}-${month}-${day}`;
+    if (this.timeString === undefined) this.timeString = '';
     this.datetimeString = this.dateString + ' ' + this.timeString;
   }
 

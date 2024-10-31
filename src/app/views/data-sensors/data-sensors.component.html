@@ -79,6 +79,16 @@
                 }" (click)="updateSort('light')"></i>
               </div>
             </th>
+            <th scope="col">
+              <div class="header-container">
+                <p class="header-text">Dust</p>
+                <i class="fa-solid" [ngClass]="{
+                  'fa-sort-up': sortColumn === 'dust' && sortDirection === 'asc',
+                  'fa-sort-down': sortColumn === 'dust' && sortDirection === 'desc',
+                  'fa-sort': sortColumn !== 'dust' || sortDirection === 'none'
+                }" (click)="updateSort('dust')"></i>
+              </div>
+            </th>
             <th scope="col" class="th-lg">
               <div class="header-container">
                 <p class="header-text">Time</p>
@@ -119,12 +129,20 @@
               </div>
 
             </td>
+            <td> 
+              <div class="input-field">
+                <input type="number" [(ngModel)]="searchDust" placeholder="Enter number"
+                  (input)="refreshDataSensors()">
+                <i class="fa-solid fa-xmark" (click)="clearDust()"></i>
+              </div>
+
+            </td>
             <td>
 
               <form class="input-field">
 
                 <input placeholder="yyyy-mm-dd hh:mm:ss" placement="bottom" [autoClose]="'outside'"
-                  [ngbPopover]="datetime" #p="ngbPopover" [(ngModel)]="datetimeString" name="datetime"/> 
+                  [ngbPopover]="datetime" #p="ngbPopover" [(ngModel)]="datetimeString" name="datetime" (keydown.enter)="refreshDataSensors()" (keydown.enter)="p.close()"/> 
                 <i class="fa-solid fa-xmark" (click)="clearDatetime()"></i>
 
                 <ng-template #datetime>
@@ -149,6 +167,7 @@
             <td>{{element.temperature}}</td>
             <td>{{element.humidity}}</td>
             <td>{{element.light}}</td>
+            <td>{{element.dust}}</td>
             <td>{{formatDate(element.time)}}</td>
           </tr>
         </tbody>

@@ -22,6 +22,10 @@ export class DashboardService {
     return this.http.get<any>(`${this.apiUrl}/min-max`);
   }
 
+  getDustCount(): Observable<number> {
+    return this.http.get<number>(`${this.apiUrl}/dust-count`);
+  }
+
   controlDevice(device: string, turnOn: boolean): Observable<any> {
     const action = turnOn ? 'on' : 'off';
     return this.http.post(`${this.apiUrl}/control?device=${device}&action=${action}`, {});

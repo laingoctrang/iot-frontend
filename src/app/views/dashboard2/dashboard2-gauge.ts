@@ -257,12 +257,12 @@ export const dustGauge: Partial<ChartOptions> = {
       colorStops: [
         {
           offset: 0,
-          color: '#E6D5F5', // Màu tím nhạt
+          color: '#DFF2EB', // Màu tím nhạt
           opacity: 1
         },
         {
           offset: 100,
-          color: '#D89A7D', // Màu cam nâu nhạt
+          color: '#7AB2D3', // Màu cam nâu nhạt
           opacity: 1
         }
       ]

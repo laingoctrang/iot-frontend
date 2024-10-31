@@ -21,4 +21,8 @@ export class DataSensorsService {
   getSearchDataSensors(params: string): Observable<any> {
     return this.http.get<any>(`${this.apiUrl}/?${params}`);
   }
+
+  getSearchDataSensors2(params: string): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/2/?${params}`);
+  }
 }

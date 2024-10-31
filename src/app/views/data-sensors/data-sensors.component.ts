@@ -42,6 +42,7 @@ export class DataSensorsComponent implements OnInit {
   searchTemperature: number | null = null;
   searchHumidity: number | null = null;
   searchLight: number | null = null;
+  searchDust: number | null = null;
   date!: NgbDateStruct;
   time!: string;
 
@@ -86,12 +87,23 @@ export class DataSensorsComponent implements OnInit {
     if (this.searchLight) {
       params = params.set('light', this.searchLight);
     }
-    if (this.dateString !== '') {
-      params = params.set('date', this.dateString);
+    if (this.searchDust) {
+      params = params.set('dust', this.searchDust);
     }
-    if (this.timeString !== '') {
-      params = params.set('time', this.timeString);
-    }
+    
+    this.dateString = this.datetimeString.split(" ")[0];
+    this.timeString = this.datetimeString.split(" ")[1];
+    this.time = '';
+    params = params.set('time', this.datetimeString);
+    
+
+    // if (this.dateString !== '') {
+    //   params = params.set('date', this.dateString);
+    // }
+    // if (this.timeString !== '') {
+    //   params = params.set('time', this.timeString);
+    //   // params = params.set('time', this.timeString + ":");
+    // }
     if (this.sortDirection !== 'none') {
       params = params.set('sortBy', this.sortColumn);
       params = params.set('sortDir', this.sortDirection);
@@ -102,7 +114,7 @@ export class DataSensorsComponent implements OnInit {
     
     console.log(params.toString());
 
-    this.dataSensorsService.getSearchDataSensors(params.toString()).subscribe((response) => {
+    this.dataSensorsService.getSearchDataSensors2(params.toString()).subscribe((response) => {
       console.log(response);
       this.dataSource = response.content;
       this.collectionSize = response.totalElements;
@@ -120,6 +132,7 @@ export class DataSensorsComponent implements OnInit {
     let day = this.date.day.toString().padStart(2, '0');
 
     this.dateString = `${year}-${month}-${day}`;
+    if (this.timeString === undefined) this.timeString = '';
     this.datetimeString = this.dateString + ' ' + this.timeString;
   }
 
@@ -146,6 +159,11 @@ export class DataSensorsComponent implements OnInit {
     this.searchLight = null;
     this.refreshDataSensors();
   }
+  
+  clearDust() {
+    this.searchDust = null;
+    this.refreshDataSensors();
+  }
 
   clearDate() {
     this.dateString = '';
@@ -168,6 +186,7 @@ export class DataSensorsComponent implements OnInit {
     this.searchTemperature = null;
     this.searchHumidity = null;
     this.searchLight = null;
+    this.searchDust = null;
     this.dateString = '';
     this.timeString = '';
     this.datetimeString = '';
@@ -191,6 +210,7 @@ export interface DataSensorsElement {
   temperature: number;
   humidity: number;
   light: number;
+  dust: number;
   time: string;
 }
 

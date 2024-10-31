@@ -33,10 +33,11 @@ import { NgApexchartsModule } from 'ng-apexcharts';
 import { NgToggleModule } from 'ng-toggle-button';
 
 import { lineChart, updateLineChart } from './dashboard-line-chart';
-import { temperatureGauge, humidityGauge, lightGauge } from './dashboard-gauge';
+import { temperatureGauge, humidityGauge, lightGauge, dustGauge } from './dashboard-gauge';
 
 import { DashboardService } from '../../services/dashboard.service';
 import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 
 
@@ -79,6 +80,7 @@ export class DashboardComponent implements OnInit, AfterViewInit {
   public temperatureGauge = temperatureGauge;
   public humidityGauge = humidityGauge;
   public lightGauge = lightGauge;
+  public dustGauge = dustGauge;
 
   public currentDate = new Date();
 
@@ -94,12 +96,14 @@ export class DashboardComponent implements OnInit, AfterViewInit {
   };
 
   constructor(
-    private dashboardService: DashboardService
+    private dashboardService: DashboardService,
+    private router: Router,
   ) {
   }
 
   ngOnInit(): void {
     this.getMinMaxDataSensors();
+    this.loadData();
     this.fanOn = JSON.parse(sessionStorage.getItem('fanOn') || 'false');
     this.acOn = JSON.parse(sessionStorage.getItem('acOn') || 'false');
     this.bulbOn = JSON.parse(sessionStorage.getItem('bulbOn') || 'false');
@@ -187,7 +191,7 @@ export class DashboardComponent implements OnInit, AfterViewInit {
       });
 
       this.getMinMaxDataSensors();
-    }, 5000);
+    }, 3000);
   }
 
   // Toggle 
@@ -227,7 +231,7 @@ export class DashboardComponent implements OnInit, AfterViewInit {
     const timeout = setTimeout(() => {
       console.error("Request timed out. Please try again.");
       this.resetProcessingState(device);  // Kết thúc trạng thái xử lý
-    }, 15000);
+    }, 10000);
   
     this.dashboardService.controlDevice(device, status).subscribe(
       (response: any) => {

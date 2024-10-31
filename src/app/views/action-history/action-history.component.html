@@ -83,7 +83,7 @@
             <form class="input-field">
 
               <input placeholder="yyyy-mm-dd hh:mm:ss" placement="bottom-start" [autoClose]="'outside'"
-                [ngbPopover]="datetime" #p="ngbPopover" [(ngModel)]="datetimeString" name="datetime"/> 
+                [ngbPopover]="datetime" #p="ngbPopover" [(ngModel)]="datetimeString" name="datetime" (keydown.enter)="refreshActionHistory()" (keydown.enter)="p.close()"/> 
               <i class="fa-solid fa-xmark" (click)="clearDatetime()"></i>
 
               <ng-template #datetime>

@@ -5,6 +5,11 @@
   border-radius: 12px;
 }
 
+label {
+  font-size: 40px;
+  font-weight: 400;
+}
+
 #gauge i {
   display: inline-flex;
   justify-content: center;
@@ -22,37 +27,7 @@
   font-size: 18px;
 }
 
-#temperature i {
-  background-color: #FF8B6A;
-}
-
-#humidity i {
-  background-color: #659CE7;
-}
-
-#light i {
-  background-color: #6DC98D;
-}
-
-.temperature-gauge-value {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-left: calc(0.06595656188147286 * 100vw - 37.32167392798462px);
-  margin-right: calc(0.0700183769848176 * 100vw - 47.07238703168923px);
-  margin-top: -30px;
-  font-weight: 300;
-  font-size: small;
-  color: #666;
-
-  span {  
-    margin-top: -15px;
-    color: #000;
-    font-size: 15px;
-  }
-}
-
-.humidity-gauge-value {
+.dust-gauge-value {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -71,25 +46,6 @@
   }
 }
 
-.light-gauge-value {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-top: -30px;
-  margin-left: calc(0.06595656188147286 * 100vw - 37.32167392798462px);
-  margin-right: calc(0.0673840413068946 * 100vw - 54.56710200893825px);
-  font-weight: 300;
-  font-size: small;
-  color: #666;
-
-  span {
-    margin-left: 15px;
-    margin-top: -15px;
-    color: #000;
-    font-size: 15px;
-  }
-}
-
 
 // Chart
 #chart {
@@ -102,8 +58,8 @@ p.title {
 
 }
 
-#lineChart {
-  height: 420px;
+#lineChart1 {
+  height: 430px;
 }
 
 // Toggle
@@ -167,18 +123,8 @@ p.title {
 }
 
 .form-check-input.fan:checked {
-  background-color: #FF8B6A;
-  border-color: #FF8B6A;
-}
-
-.form-check-input.ac:checked {
-  background-color: #659CE7;
-  border-color: #659CE7;
-}
-
-.form-check-input.bulb:checked {
-  background-color: #6DC98D;
-  border-color: #6DC98D;
+  background-color: #6595b1;
+  border-color: #6595b1;
 }
 
 /* Đổi màu của hình tròn bên trong switch */
@@ -186,42 +132,19 @@ p.title {
   box-shadow: none; /* Ánh sáng viền khi bật */
 }
 
-#fan.gradient-background {
-  background: linear-gradient(-45deg, #FFE3B1, #FFA497);
-  border: none;
+.gradient-background {
+  background: linear-gradient(-45deg, #dff2eb, #7AB2D3);
 }
 
-#ac.gradient-background {
-  background: linear-gradient(-45deg, #FDD6EE, #79B1ED);
-  border: none;
+.flash-background {
+  animation: flash .25s 10 alternate; 
 }
 
-#bulb.gradient-background {
-  background: linear-gradient(-45deg, #FBF2B3, #9ADBBD);
-  border: none;
-}
-
-
-/* Media queries */
-
-// <= 80%
-@media (min-width: 1550px) {
-  .temperature-gauge-value {
-    margin-left: 65px !important;
-    margin-right: 62px !important;
+@keyframes flash {
+  from {
+    background-color: #dff2eb; /* Màu nền ban đầu */
   }
-
-  .humidity-gauge-value {
-    margin-left: 65px !important;
-    margin-right: 59px !important;
-  }
-
-  .light-gauge-value {
-    margin-left: 65px !important;
-    margin-right: 50px !important;
-  }
-
-  #lineChart {
-    height: 380px !important;
+  to {
+    background-color: #7AB2D3; /* Màu nền nháy */
   }
 }
