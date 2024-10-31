@@ -19,3 +19,11 @@ p.text-right {
     }
 }
 
+a.text-secondary.font-weight-300 {
+    display: inline-block;       /* Đặt chế độ hiển thị là inline-block để `text-overflow` hoạt động */
+    max-width: 300px;            /* Giới hạn chiều rộng của link */
+    white-space: nowrap;         /* Không xuống dòng */
+    overflow: hidden;            /* Ẩn phần nội dung tràn ra ngoài */
+    text-overflow: ellipsis;     /* Thêm dấu `...` ở cuối */
+}
+
